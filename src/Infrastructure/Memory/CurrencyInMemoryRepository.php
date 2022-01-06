@@ -9,7 +9,7 @@ use App\Domain\Exception\RecordAlreadyExists;
 
 class CurrencyInMemoryRepository implements CurrencyRepository
 {
-    public function __construct(private array $storage)
+    public function __construct(private array $storage = [])
     {
     }
 

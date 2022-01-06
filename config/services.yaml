@@ -18,5 +18,8 @@ services:
         exclude:
             - '../src/Domain/'
 
+    App\Domain\CurrencyRepository:
+        class: 'App\Infrastructure\Memory\CurrencyInMemoryRepository'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
