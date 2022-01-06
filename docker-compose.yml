@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  application:
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql57
+
+  mysql57:
+    image: mysql:5.7
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    networks:
+      - application
+
+networks:
+  application:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.199.1/24
