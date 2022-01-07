@@ -5,6 +5,7 @@ namespace App\Infrastructure\Memory;
 
 use App\Domain\Currency;
 use App\Domain\CurrencyRepository;
+use App\Domain\Exception\EntityNotFound;
 use App\Domain\Exception\RecordAlreadyExists;
 
 class CurrencyInMemoryRepository implements CurrencyRepository
@@ -27,6 +28,14 @@ class CurrencyInMemoryRepository implements CurrencyRepository
         return [
             'collection' => $this->storage
         ];
+    }
+
+    public function findByCurrencyCode(string $currencyCode): Currency|null
+    {
+        if (array_key_exists($currencyCode, $this->storage) === false) {
+            throw EntityNotFound::forPrimaryKey($currencyCode);
+        }
+        return $this->storage[$currencyCode];
     }
 
     public function updateCurrencies(array $currencies): void
