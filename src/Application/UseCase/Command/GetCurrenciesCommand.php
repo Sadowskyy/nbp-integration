@@ -19,7 +19,7 @@ final class GetCurrenciesCommand extends Command
         $this->setHelp('This command allows you to get all currencies info stored in db');
     }
 
-    public function __construct(private GetCurrenciesHandler $getCurrenciesHandler)
+    public function __construct(private GetCurrenciesHandler $handler)
     {
         parent::__construct(self::$defaultName);
     }
@@ -27,7 +27,7 @@ final class GetCurrenciesCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-       $output->write(json_encode($this->getCurrenciesHandler->getCurrencies()));
+       $output->write(json_encode($this->handler->getCurrencies()));
 
         return 1;
     }

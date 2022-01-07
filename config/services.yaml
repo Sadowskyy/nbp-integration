@@ -20,6 +20,7 @@ services:
 
     App\Domain\CurrencyRepository:
         class: 'App\Infrastructure\Memory\CurrencyInMemoryRepository'
-
+    App\Domain\CurrencyApiIntegration:
+        class: 'App\Infrastructure\CurrencyApiIntegrationImpl'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -28,4 +28,26 @@ class CurrencyInMemoryRepository implements CurrencyRepository
             'collection' => $this->storage
         ];
     }
+
+    public function updateCurrencies(array $currencies): void
+    {
+        /**@var Currency $currency */
+        foreach ($currencies as $currency) {
+            try {
+                $this->save($currency);
+            } catch (RecordAlreadyExists $e) {
+                $this->updateCurrencyIfNeccesary($currency);
+            }
+        }
+    }
+
+    private function updateCurrencyIfNeccesary(Currency $currency): void
+    {
+        /**@var Currency $storedCurrency */
+        $storedCurrency = $this->storage[$currency->getCurrencyCode()];
+
+        if ($currency->getCurrencyExchange() !== $storedCurrency->getCurrencyExchange()) {
+            $this->storage[$currency->getCurrencyCode()] = $currency;
+        }
+    }
 }
