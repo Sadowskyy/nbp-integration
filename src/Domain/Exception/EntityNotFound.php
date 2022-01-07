@@ -7,7 +7,7 @@ use Exception;
 
 class EntityNotFound extends Exception
 {
-    public static function forPrimaryKey(string $primaryKey): self
+    public static function forPrimaryKey(string $code): self
     {
         return new self("Entity for primary key ($code) do not exists.");
     }
