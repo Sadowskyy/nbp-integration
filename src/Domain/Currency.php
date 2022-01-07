@@ -29,17 +29,22 @@ class Currency implements \JsonSerializable
     private string $currencyCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float", length=255)
      */
-    private string $currencyExchange;
+    private float $currencyExchange;
 
 
-    public function __construct(string $id, string $name, string $currencyCode, string $currencyExchange)
+    public function __construct(string $id, string $name, string $currencyCode, float $currencyExchange)
     {
         $this->id = $id;
         $this->name = $name;
         $this->currencyCode = $currencyCode;
         $this->currencyExchange = $currencyExchange;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getName(): string
